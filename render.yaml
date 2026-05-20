@@ -1,0 +1,22 @@
+# Render Blueprint — Streamlit app
+# Free tier: DB/uploads reset on redeploy. Use sidebar backup or enable disk on paid plan.
+
+services:
+  - type: web
+    name: data-track-dashboard
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run streamlit_app.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      # Optional password for public URL:
+      # - key: APP_PASSWORD
+      #   sync: false
+      # Paid plan — persistent storage:
+      # - key: DATA_DIR
+      #   value: /data
+    # disk:
+    #   name: data-track-data
+    #   mountPath: /data
+    #   sizeGB: 1
